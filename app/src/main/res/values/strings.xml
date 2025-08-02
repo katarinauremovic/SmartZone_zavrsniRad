@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">SmartZone</string>
+    <string name="register_title">Create Your Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="birth_date">Date of Birth</string>
+    <string name="register_button">Register</string>
+    <string name="login_link">Already have an account? Log in</string>
+    <string name="education_level_prompt">Select education level</string>
+    <string-array name="education_levels">
+        <item>High School</item>
+        <item>Undergraduate</item>
+        <item>Graduate</item>
+        <item>PhD</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="sort_options">
+        <item>Newest first</item>
+        <item>Oldest first</item>
+    </string-array>
 </resources>
