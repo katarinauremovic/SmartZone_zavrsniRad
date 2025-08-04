@@ -20,7 +20,8 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        registrationHelper = RegistrationHelper(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
+        registrationHelper =
+            RegistrationHelper(FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
 
         val firstNameEditText = findViewById<EditText>(R.id.firstNameEditText)
         val lastNameEditText = findViewById<EditText>(R.id.lastNameEditText)
@@ -37,10 +38,11 @@ class RegistrationActivity : AppCompatActivity() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-                val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                birthDateEditText.setText(date)
-            }, year, month, day)
+            val datePickerDialog =
+                DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+                    val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                    birthDateEditText.setText(date)
+                }, year, month, day)
 
             datePickerDialog.show()
         }
@@ -57,7 +59,8 @@ class RegistrationActivity : AppCompatActivity() {
                 email, password, firstName, lastName, education, birthDate,
                 onSuccess = {
                     Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-
+                    startActivity(Intent(this, SettingsActivity::class.java))
+                    finish()
                 },
                 onFailure = { message ->
                     Toast.makeText(this, "Registration failed: $message", Toast.LENGTH_LONG).show()
