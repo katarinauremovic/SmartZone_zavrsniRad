@@ -31,7 +31,7 @@ class RegistrationHelperTests {
     private val firstName = "Test"
     private val lastName = "User"
     private val education = "High School"
-    private val birthDate = "2008-01-01"
+    private val birthDate = "01.01.2008."
 
     @Before
     fun setUp() {
