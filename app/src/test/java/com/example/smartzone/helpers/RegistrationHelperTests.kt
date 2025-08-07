@@ -89,7 +89,7 @@ class RegistrationHelperTests {
     }
 
     @Test
-    fun registerUser_userIDisNULL_callsOnFailure(){
+    fun registerUser_userIDisNull_callsOnFailure(){
         //Arrange
         var successCalled = false
         var failureMessage: String? = null
@@ -181,5 +181,105 @@ class RegistrationHelperTests {
         //Assert
         assertFalse(successCalled)
         assertEquals("Firestore write failed", failureMessage)
+    }
+
+    @Test
+    fun registerUser_passwordTooShort_callsOnFailure(){
+        //Arrange
+        val shortPassword = "pass"
+        var successCalled = false
+        var failureMessage = ""
+
+        //Act
+        registrationHelper.registerUser(email,shortPassword, firstName,lastName,education,birthDate,
+            onSuccess = {successCalled = true},
+            onFailure = {failureMessage = it})
+
+        //Assert
+        assertFalse(successCalled)
+        assertEquals("Password must be at least 8 characters long and contain uppercase, lowercase letters and a number.", failureMessage)
+    }
+
+    @Test
+    fun registerUser_passwordNoUppercase_callsOnFailure(){
+        //Arrange
+        val shortPassword = "password1"
+        var successCalled = false
+        var failureMessage = ""
+
+        //Act
+        registrationHelper.registerUser(email,shortPassword, firstName,lastName,education,birthDate,
+            onSuccess = {successCalled = true},
+            onFailure = {failureMessage = it})
+
+        //Assert
+        assertFalse(successCalled)
+        assertEquals("Password must be at least 8 characters long and contain uppercase, lowercase letters and a number.", failureMessage)
+    }
+
+    @Test
+    fun registerUser_passwordNoLowercase_callsOnFailure(){
+        //Arrange
+        val shortPassword = "PASSWORD1"
+        var successCalled = false
+        var failureMessage = ""
+
+        //Act
+        registrationHelper.registerUser(email,shortPassword, firstName,lastName,education,birthDate,
+            onSuccess = {successCalled = true},
+            onFailure = {failureMessage = it})
+
+        //Assert
+        assertFalse(successCalled)
+        assertEquals("Password must be at least 8 characters long and contain uppercase, lowercase letters and a number.", failureMessage)
+    }
+
+    @Test
+    fun registerUser_passwordNoDigit_callsOnFailure(){
+        //Arrange
+        val shortPassword = "Password"
+        var successCalled = false
+        var failureMessage = ""
+
+        //Act
+        registrationHelper.registerUser(email,shortPassword, firstName,lastName,education,birthDate,
+            onSuccess = {successCalled = true},
+            onFailure = {failureMessage = it})
+
+        //Assert
+        assertFalse(successCalled)
+        assertEquals("Password must be at least 8 characters long and contain uppercase, lowercase letters and a number.", failureMessage)
+    }
+
+    @Test
+    fun registerUser_emptyEmailField_callsOnFailure(){
+        //Arrange
+        var successCalled = false
+        var failureMessage = ""
+
+        //Act
+        registrationHelper.registerUser("",password, firstName,lastName,education,birthDate,
+            onSuccess = {successCalled = true},
+            onFailure = {failureMessage = it})
+
+        //Assert
+        assertFalse(successCalled)
+        assertEquals("Email and password are required fields.", failureMessage)
+    }
+
+    @Test
+    fun registerUser_emptyPasswordField_callsOnFailure(){
+        //Arrange
+        var successCalled = false
+        var failureMessage = ""
+
+        //Act
+        registrationHelper.registerUser(email,"", firstName,lastName,education,birthDate,
+            onSuccess = {successCalled = true},
+            onFailure = {failureMessage = it})
+
+        //Assert
+        assertFalse(successCalled)
+        assertEquals("Email and password are required fields.", failureMessage)
     }
 }

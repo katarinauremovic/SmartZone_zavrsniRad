@@ -17,6 +17,15 @@ class RegistrationHelper(
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
+        if (email == "" || password == ""){
+            onFailure("Email and password are required fields.")
+            return
+        }
+        if (!PasswordValidator.isValid(password)) {
+            onFailure("Password must be at least 8 characters long and contain uppercase, lowercase letters and a number.")
+            return
+        }
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
