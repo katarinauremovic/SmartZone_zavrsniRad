@@ -3,6 +3,7 @@ package com.example.smartzone.activities
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -31,6 +32,8 @@ class RegistrationActivity : AppCompatActivity() {
         val birthDateEditText = findViewById<EditText>(R.id.dateOfBirthEditText)
         val registerButton = findViewById<Button>(R.id.registerButton)
         val goToLoginText = findViewById<TextView>(R.id.goToLogin)
+        val messageTextView = findViewById<TextView>(R.id.messageTextView)
+
 
         birthDateEditText.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -54,6 +57,9 @@ class RegistrationActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString().trim()
             val education = educationSpinner.selectedItem.toString()
             val birthDate = birthDateEditText.text.toString().trim()
+            messageTextView.text = ""
+            messageTextView.visibility = View.GONE
+
 
             registrationHelper.registerUser(
                 email, password, firstName, lastName, education, birthDate,
@@ -63,7 +69,10 @@ class RegistrationActivity : AppCompatActivity() {
                     finish()
                 },
                 onFailure = { message ->
-                    Toast.makeText(this, "Registration failed: $message", Toast.LENGTH_LONG).show()
+                    messageTextView.setTextColor(getColor(android.R.color.holo_red_dark))
+                    messageTextView.text = "Registration failed: $message"
+                    messageTextView.visibility = View.VISIBLE
+
                 }
             )
         }

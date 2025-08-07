@@ -98,6 +98,17 @@
             android:entries="@array/education_levels"
             android:spinnerMode="dropdown" />
 
+        <TextView
+            android:id="@+id/messageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:text=""
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
 
         <Button
             android:id="@+id/registerButton"
