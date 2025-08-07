@@ -23,4 +23,12 @@
         <item>Newest first</item>
         <item>Oldest first</item>
     </string-array>
+    <string name="profile_name">Profile</string>
+    <string name="footer">SmartZone © 2025</string>
+    <string name="logout">Logout</string>
+    <string name="save_button">Save profile</string>
+    <string name="change_password_button">Change password</string>
+    <string name="delete_button">Delete account</string>
+    <string name="new_password_hint">New password</string>
+    <string name="confirm_password_hint">Confirm account</string>
 </resources>

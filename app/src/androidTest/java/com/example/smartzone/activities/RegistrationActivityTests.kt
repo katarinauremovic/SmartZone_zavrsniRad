@@ -10,9 +10,6 @@ import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
-import androidx.test.espresso.matcher.RootMatchers.withDecorView
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -21,8 +18,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.smartzone.FirebaseTestInit
 import com.example.smartzone.R
 import com.google.firebase.auth.FirebaseAuth
-import org.hamcrest.CoreMatchers.anything
-import org.hamcrest.CoreMatchers.not
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -32,7 +27,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class RegistrationActivityTests {
 
-    private lateinit var decorView: View
     @get:Rule
     val activityRule = ActivityScenarioRule(RegistrationActivity::class.java)
 

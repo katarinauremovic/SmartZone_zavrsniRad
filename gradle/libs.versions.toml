@@ -20,6 +20,7 @@ mockitoInline = "5.2.0"
 testRules = "1.5.0"
 testRunner = "1.5.2"
 espressoIntents = "3.7.0"
+material = "1.12.0"
 
 
 [libraries]
@@ -49,6 +50,7 @@ androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "testRunner" }
 androidx-espresso-intents = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espressoIntents" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

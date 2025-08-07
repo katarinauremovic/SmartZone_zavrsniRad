@@ -1,7 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/settingsRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLight"
+    android:orientation="vertical">
 
+    <include layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="30dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical"
+                android:layout_marginHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/user"
+                    android:contentDescription="@string/profile_name"
+                    android:backgroundTint="@color/accentMint" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/logoutButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/logout"
+                    android:contentDescription="@string/logout"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="top"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/editFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/first_name"
+                android:textColor="@color/textPrimary"
+                android:backgroundTint="@color/accentMint"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/editLastName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/last_name"
+                android:textColor="@color/textPrimary"
+                android:backgroundTint="@color/accentMint" />
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress"
+                android:enabled="false"
+                android:textColorHint="@color/textSecondary"
+                android:backgroundTint="@color/secondaryBlue" />
+
+            <Spinner
+                android:id="@+id/editEducationSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:entries="@array/education_levels"
+                android:backgroundTint="@color/accentMint"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/editBirthDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/birth_date"
+                android:focusable="false"
+                android:backgroundTint="@color/accentMint"
+                android:textColor="@color/textPrimary" />
+
+            <Button
+                android:id="@+id/saveProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/save_button"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/primaryBlue"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/changePasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_password_button"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/primaryGreen"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/deleteAccountButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_button"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <include layout="@layout/footer"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
 </LinearLayout>
