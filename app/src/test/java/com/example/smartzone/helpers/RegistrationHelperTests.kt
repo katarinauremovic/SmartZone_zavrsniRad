@@ -16,6 +16,7 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
+import org.mockito.kotlin.whenever
 import java.lang.Exception
 
 class RegistrationHelperTests {
@@ -46,14 +47,14 @@ class RegistrationHelperTests {
     @Test
     fun registerUser_validInput_successfulRegistration() {
         //Arrange
-        `when`(auth.createUserWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(auth.createUserWithEmailAndPassword(email, password)).thenReturn(task)
 
-        `when`(task.addOnCompleteListener(any())).thenAnswer {
+        whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
-            `when`(task.isSuccessful).thenReturn(true)
-            `when`(task.result).thenReturn(authResult)
-            `when`(authResult.user).thenReturn(user)
-            `when`(user.uid).thenReturn("user1")
+            whenever(task.isSuccessful).thenReturn(true)
+            whenever(task.result).thenReturn(authResult)
+            whenever(authResult.user).thenReturn(user)
+            whenever(user.uid).thenReturn("user1")
             listener.onComplete(task)
             task
         }
@@ -61,17 +62,17 @@ class RegistrationHelperTests {
         val documentReference: DocumentReference = mock()
         val setTask: Task<Void> = mock()
 
-        `when`(documentReference.set(any())).thenReturn(setTask)
+        whenever(documentReference.set(any())).thenReturn(setTask)
 
-        `when`(firestore.collection("users")).thenReturn(mock())
-        `when`(firestore.collection("users").document("user1")).thenReturn(documentReference)
-        `when`(setTask.addOnSuccessListener(any())).thenAnswer {
+        whenever(firestore.collection("users")).thenReturn(mock())
+        whenever(firestore.collection("users").document("user1")).thenReturn(documentReference)
+        whenever(setTask.addOnSuccessListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnSuccessListener<Void>
             listener.onSuccess(null)
             setTask
         }
 
-        `when`(setTask.addOnFailureListener(any())).thenReturn(setTask)
+        whenever(setTask.addOnFailureListener(any())).thenReturn(setTask)
 
         var successCalled = false
         var failureMessage: String? = null
@@ -94,12 +95,12 @@ class RegistrationHelperTests {
         var successCalled = false
         var failureMessage: String? = null
 
-        `when`(auth.createUserWithEmailAndPassword(email,password)).thenReturn(task)
-        `when`(task.addOnCompleteListener(any())).thenAnswer {
+        whenever(auth.createUserWithEmailAndPassword(email,password)).thenReturn(task)
+        whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
-            `when`(task.isSuccessful).thenReturn(true)
-            `when`(task.result).thenReturn(authResult)
-            `when`(authResult.user).thenReturn(null)
+            whenever(task.isSuccessful).thenReturn(true)
+            whenever(task.result).thenReturn(authResult)
+            whenever(authResult.user).thenReturn(null)
             listener.onComplete(task)
             task
         }
@@ -120,11 +121,11 @@ class RegistrationHelperTests {
         var successCalled = false
         var failureMessage: String? = null
 
-        `when`(auth.createUserWithEmailAndPassword(email,password)).thenReturn(task)
-        `when`(task.addOnCompleteListener(any())).thenAnswer {
+        whenever(auth.createUserWithEmailAndPassword(email,password)).thenReturn(task)
+        whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
-            `when`(task.isSuccessful).thenReturn(false)
-            `when`(task.exception).thenReturn(Exception("Authentication failed"))
+            whenever(task.isSuccessful).thenReturn(false)
+            whenever(task.exception).thenReturn(Exception("Authentication failed"))
             listener.onComplete(task)
             task
         }
@@ -149,29 +150,29 @@ class RegistrationHelperTests {
         val firestoreError = Exception("Firestore write failed")
         val mockVoidTask = mock<Task<Void>>()
 
-        `when`(auth.createUserWithEmailAndPassword(email, password)).thenReturn(task)
-        `when`(documentReference.set(any())).thenReturn(mockVoidTask)
+        whenever(auth.createUserWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(documentReference.set(any())).thenReturn(mockVoidTask)
 
-        `when`(firestore.collection("users")).thenReturn(mock())
-        `when`(firestore.collection("users").document("user1")).thenReturn(documentReference)
+        whenever(firestore.collection("users")).thenReturn(mock())
+        whenever(firestore.collection("users").document("user1")).thenReturn(documentReference)
 
-        `when`(task.addOnCompleteListener(any())).thenAnswer {
+        whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
-            `when`(task.isSuccessful).thenReturn(true)
-            `when`(task.result).thenReturn(authResult)
-            `when`(authResult.user).thenReturn(user)
-            `when`(user.uid).thenReturn("user1")
+            whenever(task.isSuccessful).thenReturn(true)
+            whenever(task.result).thenReturn(authResult)
+            whenever(authResult.user).thenReturn(user)
+            whenever(user.uid).thenReturn("user1")
             listener.onComplete(task)
             task
         }
 
-        `when`(mockVoidTask.addOnFailureListener(any())).thenAnswer {
+        whenever(mockVoidTask.addOnFailureListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnFailureListener
             listener.onFailure(firestoreError)
             mockVoidTask
         }
 
-        `when`(mockVoidTask.addOnSuccessListener(any())).thenReturn(mockVoidTask)
+        whenever(mockVoidTask.addOnSuccessListener(any())).thenReturn(mockVoidTask)
 
         //Act
         registrationHelper.registerUser(email, password, firstName, lastName, education, birthDate,

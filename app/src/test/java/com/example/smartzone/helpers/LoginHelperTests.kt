@@ -8,6 +8,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.*
+import org.mockito.kotlin.whenever
 
 class LoginHelperTests {
 
@@ -47,11 +48,11 @@ class LoginHelperTests {
         val password = "Password123"
         var successCalled = false
 
-        `when`(auth.signInWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(auth.signInWithEmailAndPassword(email, password)).thenReturn(task)
 
-        `when`(task.addOnCompleteListener(any())).thenAnswer {
+        whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
-            `when`(task.isSuccessful).thenReturn(true)
+            whenever(task.isSuccessful).thenReturn(true)
             listener.onComplete(task)
             task
         }
@@ -76,12 +77,12 @@ class LoginHelperTests {
 
         val exception = Exception("Login failed")
 
-        `when`(auth.signInWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(auth.signInWithEmailAndPassword(email, password)).thenReturn(task)
 
-        `when`(task.addOnCompleteListener(any())).thenAnswer {
+        whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
-            `when`(task.isSuccessful).thenReturn(false)
-            `when`(task.exception).thenReturn(exception)
+            whenever(task.isSuccessful).thenReturn(false)
+            whenever(task.exception).thenReturn(exception)
             listener.onComplete(task)
             task
         }
