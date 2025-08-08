@@ -31,4 +31,21 @@
     <string name="delete_button">Delete account</string>
     <string name="new_password_hint">New password</string>
     <string name="confirm_password_hint">Confirm account</string>
+    <string name="search_zones_hint">Search zones\u2026</string>
+    <string name="add_new_zone_des">Add new zone</string>
+    <string name="zone_name">Name zone</string>
+    <string name="zone_focus">Focus (e.g. subject)</string>
+    <string name="zone_created_at">Created at</string>
+    <string name="add_new_zone_header">Add new zone</string>
+    <string name="edit_des">edit</string>
+    <string name="delete_des">delete</string>
+    <string name="notes">Notes</string>
+    <string name="documents">Documents</string>
+    <string name="add_button">add</string>
+    <string name="save_edit">SAVE</string>
+    <string name="note_title">Note title</string>
+    <string name="note">Note content</string>
+    <string name="document_name">document name</string>
+    <string name="uploaded">Uploaded: /u2026</string>
+    <string name="preview">Short preview/u2026</string>
 </resources>

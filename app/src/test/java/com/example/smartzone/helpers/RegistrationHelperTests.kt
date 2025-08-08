@@ -14,7 +14,6 @@ import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 import java.lang.Exception
@@ -47,7 +46,8 @@ class RegistrationHelperTests {
     @Test
     fun registerUser_validInput_successfulRegistration() {
         //Arrange
-        whenever(auth.createUserWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(auth.createUserWithEmailAndPassword(email, password))
+            .thenReturn(task)
 
         whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
@@ -63,16 +63,16 @@ class RegistrationHelperTests {
         val setTask: Task<Void> = mock()
 
         whenever(documentReference.set(any())).thenReturn(setTask)
-
         whenever(firestore.collection("users")).thenReturn(mock())
-        whenever(firestore.collection("users").document("user1")).thenReturn(documentReference)
+        whenever(firestore.collection("users")
+            .document("user1"))
+            .thenReturn(documentReference)
+
         whenever(setTask.addOnSuccessListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnSuccessListener<Void>
             listener.onSuccess(null)
             setTask
         }
-
-        whenever(setTask.addOnFailureListener(any())).thenReturn(setTask)
 
         var successCalled = false
         var failureMessage: String? = null
@@ -86,7 +86,6 @@ class RegistrationHelperTests {
         //Assert
         assert(successCalled)
         assert(failureMessage == null)
-
     }
 
     @Test
