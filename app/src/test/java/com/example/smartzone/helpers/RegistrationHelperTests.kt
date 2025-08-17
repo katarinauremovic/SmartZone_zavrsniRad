@@ -235,7 +235,7 @@ class RegistrationHelperTests {
     }
 
     @Test
-    fun registerUser_passwordNoDigit_callsOnFailure(){
+    fun registerUser_passwordNoNumber_callsOnFailure(){
         //Arrange
         val shortPassword = "Password"
         var successCalled = false

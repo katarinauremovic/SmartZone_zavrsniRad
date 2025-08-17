@@ -32,6 +32,8 @@ class ZonesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
         setContentView(R.layout.activity_zones)
 
         val toolbar = findViewById<Toolbar>(R.id.topAppBar)
@@ -52,6 +54,7 @@ class ZonesActivity : AppCompatActivity() {
         zonesRecyclerView.adapter = zoneAdapter
 
         zonesHelper.loadZones(
+            userId ,
             onSuccess = { zones ->
                 allZones = zones
                 updateDisplayedZones()
@@ -118,6 +121,7 @@ class ZonesActivity : AppCompatActivity() {
             onSuccess = {
                 Toast.makeText(this, "Zone created", Toast.LENGTH_SHORT).show()
                 zonesHelper.loadZones(
+                    userId,
                     onSuccess = { zones ->
                         allZones = zones
                         updateDisplayedZones()

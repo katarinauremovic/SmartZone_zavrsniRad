@@ -28,6 +28,7 @@ import com.example.smartzone.adapters.NoteAdapter
 import com.example.smartzone.entities.Note
 import com.example.smartzone.helpers.DocumentsHelper
 import com.example.smartzone.helpers.NotesHelper
+import com.google.firebase.auth.FirebaseAuth
 
 
 class ZoneDetailActivity : AppCompatActivity() {
@@ -92,7 +93,8 @@ class ZoneDetailActivity : AppCompatActivity() {
 
         zoneId = intent.getStringExtra("zoneId") ?: return finish()
 
-        zonesHelper.getZoneById(zoneId, { loadedZone ->
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        zonesHelper.getZoneById( userId, zoneId, { loadedZone ->
             zone = loadedZone
             titleText.text = zone.name
             focusText.text = "Focus: ${zone.focus}"
@@ -134,7 +136,7 @@ class ZoneDetailActivity : AppCompatActivity() {
                 .setTitle("Delete Zone")
                 .setMessage("Are you sure you want to delete this zone? All notes inside will also be lost.")
                 .setPositiveButton("Delete") { _, _ ->
-                    zonesHelper.deleteZone(zoneId, {
+                    zonesHelper.deleteZone(userId, zoneId, {
                         Toast.makeText(this, "Zone deleted", Toast.LENGTH_SHORT).show()
                         finish()
                         val intent = Intent(this, ZonesActivity::class.java)
@@ -180,6 +182,7 @@ class ZoneDetailActivity : AppCompatActivity() {
         val saveButton = dialogView.findViewById<TextView>(R.id.saveEditButton)
         val cancelButton = dialogView.findViewById<TextView>(R.id.cancelEditButton)
 
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         nameEditText.setText(zone.name)
         focusEditText.setText(zone.focus)
 
@@ -192,7 +195,7 @@ class ZoneDetailActivity : AppCompatActivity() {
             val newFocus = focusEditText.text.toString().trim()
 
             if (newName.isNotEmpty()) {
-                zonesHelper.updateZone(zoneId, newName, newFocus, {
+                zonesHelper.updateZone(userId, zoneId, newName, newFocus, {
                     Toast.makeText(this, "Zone updated", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                     finish()

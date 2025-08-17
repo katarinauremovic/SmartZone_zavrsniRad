@@ -5,10 +5,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class NotesHelper {
+class NotesHelper (private val auth: FirebaseAuth = FirebaseAuth.getInstance(),
+                   private val db: FirebaseFirestore = FirebaseFirestore.getInstance()){
 
-    private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
 
     fun addNote(
         zoneId: String,

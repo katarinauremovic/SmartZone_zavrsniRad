@@ -7,16 +7,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class ZonesHelper {
-
-    private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
+class ZonesHelper(
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance(),
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+) {
 
     fun loadZones(
+        userId: String,
         onSuccess: (List<Zone>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        val userId = auth.currentUser?.uid ?: return
 
         db.collection("users").document(userId).collection("zones")
             .orderBy("createdAt", Query.Direction.DESCENDING)
@@ -68,6 +68,11 @@ class ZonesHelper {
         onSuccess: (String) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
+        if (name.isEmpty()) {
+            onFailure(Exception("Name cannot be empty"))
+            return
+        }
+
         val zoneRef = db.collection("users").document(userId).collection("zones").document()
         val generatedId = zoneRef.id
 
@@ -83,12 +88,13 @@ class ZonesHelper {
     }
 
     fun getZoneById(
+        userId: String,
         zoneId: String,
         onSuccess: (Zone) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        FirebaseFirestore.getInstance()
+
+        db
             .collection("users").document(userId)
             .collection("zones").document(zoneId)
             .get()
@@ -102,15 +108,16 @@ class ZonesHelper {
     }
 
     fun updateZone(
+        userId: String,
         zoneId: String,
         newName: String,
         newFocus: String,
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
         val updateData = mapOf("name" to newName, "focus" to newFocus)
-        FirebaseFirestore.getInstance()
+        db
             .collection("users").document(userId)
             .collection("zones").document(zoneId)
             .update(updateData)
@@ -119,12 +126,13 @@ class ZonesHelper {
     }
 
     fun deleteZone(
+        userId: String,
         zoneId: String,
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        FirebaseFirestore.getInstance()
+
+        db
             .collection("users").document(userId)
             .collection("zones").document(zoneId)
             .delete()

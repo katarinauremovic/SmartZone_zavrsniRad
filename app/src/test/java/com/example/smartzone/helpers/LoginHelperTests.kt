@@ -31,13 +31,15 @@ class LoginHelperTests {
         var failureMessage = ""
 
         //Act
-        loginHelper.loginUser("", "", onSuccess = {}, onFailure = {
-            calledSuccess = true
-            failureMessage = it
-        })
+        loginHelper.loginUser("", "",
+            onSuccess = {
+                calledSuccess = true
+            }, onFailure = {
+                failureMessage = it
+            })
 
         //Assert
-        assert(calledSuccess)
+        assertFalse(calledSuccess)
         assert(failureMessage == "Please fill in all fields")
     }
 
@@ -48,7 +50,8 @@ class LoginHelperTests {
         val password = "Password123"
         var successCalled = false
 
-        whenever(auth.signInWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(auth.signInWithEmailAndPassword(email, password))
+            .thenReturn(task)
 
         whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
@@ -75,9 +78,10 @@ class LoginHelperTests {
         var successCalled = false
         var failureMessage: String? = null
 
-        val exception = Exception("Login failed")
+        val exception = Exception("Incorrect login credentials")
 
-        whenever(auth.signInWithEmailAndPassword(email, password)).thenReturn(task)
+        whenever(auth.signInWithEmailAndPassword(email, password))
+            .thenReturn(task)
 
         whenever(task.addOnCompleteListener(any())).thenAnswer {
             val listener = it.arguments[0] as OnCompleteListener<AuthResult>
@@ -97,6 +101,6 @@ class LoginHelperTests {
 
         //Assert
         assertFalse(successCalled)
-        assert(failureMessage == "Login failed")
+        assert(failureMessage == "Incorrect login credentials")
     }
 }
