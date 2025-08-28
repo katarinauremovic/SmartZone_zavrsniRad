@@ -109,7 +109,6 @@
             android:textSize="14sp"
             android:visibility="gone" />
 
-
         <Button
             android:id="@+id/registerButton"
             android:layout_width="match_parent"

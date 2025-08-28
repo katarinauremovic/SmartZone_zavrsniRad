@@ -11,12 +11,15 @@ android {
 
     defaultConfig {
         applicationId = "com.example.smartzone"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -38,6 +41,17 @@ android {
     buildFeatures {
         compose = true
     }
+    configurations.configureEach {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "com.google.protobuf" && requested.name == "protobuf-lite") {
+
+                useTarget("com.google.protobuf:protobuf-javalite:3.25.3")
+            }
+        }
+
+        resolutionStrategy.force("com.google.protobuf:protobuf-javalite:3.25.3")
+    }
+
 }
 
 dependencies {
@@ -52,6 +66,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.appcompat)
+    androidTestImplementation(libs.androidx.espresso.contrib)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,6 +84,30 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.espresso.intents)
     implementation(libs.material)
+    androidTestImplementation(platform(libs.firebase.bom))
+    androidTestImplementation(libs.androidx.espresso.core) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    androidTestImplementation(libs.androidx.espresso.intents) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    androidTestImplementation(libs.androidx.espresso.contrib) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    androidTestImplementation(libs.androidx.junit) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    androidTestImplementation(libs.androidx.test.rules) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    androidTestImplementation(libs.androidx.test.runner) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    androidTestImplementation(libs.androidx.ui.test.junit4) {
+        exclude(group = "com.google.protobuf", module = "protobuf-lite")
+    }
+    implementation(libs.protobuf.javalite)
+    androidTestImplementation(libs.protobuf.javalite)
 
 
 }

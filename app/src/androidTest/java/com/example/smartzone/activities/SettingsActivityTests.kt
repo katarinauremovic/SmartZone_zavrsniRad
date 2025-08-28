@@ -56,8 +56,10 @@ class SettingsActivityTests {
     fun deleteAccount_clickOnButton_OpenDeleteAccountDialog() {
         ActivityScenario.launch(SettingsActivity::class.java)
 
-        onView(withId(R.id.deleteAccountButton)).perform(scrollTo(), click())
-        onView(withText("Delete Account")).check(matches(isDisplayed()))
+        onView(withId(R.id.deleteAccountButton))
+            .perform(scrollTo(), click())
+        onView(withText("Delete Account"))
+            .check(matches(isDisplayed()))
     }
 
     @Test

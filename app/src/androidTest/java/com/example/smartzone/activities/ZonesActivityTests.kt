@@ -100,12 +100,17 @@ class ZonesActivityTests {
     fun createZones_validZoneData_addsNewZone() {
         ActivityScenario.launch(ZonesActivity::class.java)
 
-        onView(withId(R.id.addZoneButton)).perform(click())
+        onView(withId(R.id.addZoneButton))
+            .perform(click())
 
-        onView(withId(R.id.zoneNameEditText)).perform(typeText("Test Zone"))
-        onView(withId(R.id.zoneFocusEditText)).perform(typeText("Test"))
-        onView(withId(R.id.createButton)).perform(click())
+        onView(withId(R.id.zoneNameEditText))
+            .perform(typeText("Test Zone"))
+        onView(withId(R.id.zoneFocusEditText))
+            .perform(typeText("Test"))
+        onView(withId(R.id.createButton))
+            .perform(click())
 
-        onView(withText("Test Zone")).check(matches(isDisplayed()))
+        onView(withText("Test Zone"))
+            .check(matches(isDisplayed()))
     }
 }

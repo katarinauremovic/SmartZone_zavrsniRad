@@ -43,6 +43,12 @@ class ZonesActivity : AppCompatActivity() {
         searchEditText = findViewById(R.id.searchZoneEditText)
         sortSpinner = findViewById(R.id.sortZoneSpinner)
         val addZoneButton = findViewById<FloatingActionButton>(R.id.addZoneButton)
+        val openPlaner = findViewById<FloatingActionButton>(R.id.fabOpenPlaner)
+
+        openPlaner.setOnClickListener {
+            startActivity(Intent(this, PlannerActivity::class.java))
+
+        }
 
         zoneAdapter = ZoneAdapter(emptyList()) { selectedZone ->
             val intent = Intent(this, ZoneDetailActivity::class.java)

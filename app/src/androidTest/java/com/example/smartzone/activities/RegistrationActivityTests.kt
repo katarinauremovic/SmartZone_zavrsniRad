@@ -1,8 +1,5 @@
 package com.example.smartzone.activities
 
-import ToastMatcher
-import android.view.View
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
@@ -11,6 +8,7 @@ import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -48,15 +46,21 @@ class RegistrationActivityTests {
         //Arrange
         val email = "user_${System.currentTimeMillis()}@gmail.com"
 
-        onView(withId(R.id.firstNameEditText)).perform(typeText("test"))
-        onView(withId(R.id.lastNameEditText)).perform(typeText("user"))
-        onView(withId(R.id.emailEditText)).perform(typeText(email))
-        onView(withId(R.id.passwordEditText)).perform(typeText("Password123"))
-        closeSoftKeyboard()
+        onView(withId(R.id.firstNameEditText))
+            .perform(typeText("test"))
+        onView(withId(R.id.lastNameEditText))
+            .perform(typeText("user"))
+        onView(withId(R.id.emailEditText))
+            .perform(typeText(email))
+        onView(withId(R.id.passwordEditText))
+            .perform(typeText("Password123"))
+        onView(isRoot())
+            .perform(closeSoftKeyboard())
 
         //Act
-        onView(withId(R.id.registerButton)).perform(scrollTo(), click())
-        Thread.sleep(1000)
+        onView(withId(R.id.registerButton))
+            .perform(scrollTo(), click())
+
     }
 
     @Test

@@ -48,4 +48,15 @@
     <string name="document_name">document name</string>
     <string name="uploaded">Uploaded: /u2026</string>
     <string name="preview">Short preview/u2026</string>
+    <string name="open_calendar">Open calendar</string>
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
 </resources>
