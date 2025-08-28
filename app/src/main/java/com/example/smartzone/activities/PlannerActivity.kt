@@ -81,7 +81,7 @@ class PlannerActivity : AppCompatActivity() {
             .setView(dialogView)
             .setPositiveButton("Save") { _, _ ->
                 val title = etTitle.text.toString().trim()
-                val dayIndex = spinnerDay.selectedItemPosition + 1 // MONDAY = 1
+                val dayIndex = spinnerDay.selectedItemPosition + 1
                 val hour = if (Build.VERSION.SDK_INT >= 23) timePicker.hour else timePicker.currentHour
                 val minute = if (Build.VERSION.SDK_INT >= 23) timePicker.minute else timePicker.currentMinute
                 val reminder = etReminder.text.toString().toIntOrNull() ?: 10

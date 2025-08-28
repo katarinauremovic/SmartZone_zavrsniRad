@@ -10,8 +10,6 @@ import com.example.smartzone.entities.PlannerEvent
 import com.example.smartzone.receiver.PlannerReceiver
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import java.time.*
 
