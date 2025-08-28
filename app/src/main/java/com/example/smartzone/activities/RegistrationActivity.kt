@@ -66,7 +66,7 @@ class RegistrationActivity : AppCompatActivity() {
                 email, password, firstName, lastName, education, birthDate,
                 onSuccess = {
                     Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SettingsActivity::class.java))
+                    startActivity(Intent(this, ZonesActivity::class.java))
                     finish()
                 },
                 onFailure = { message ->
